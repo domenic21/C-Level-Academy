@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+.cool-underline{
+    position: relative;
+}
+.cool-underline::after{
+    content: '';
+    height: 10px;
+    background-color:blue;
+    display: block;
+    position: absolute;
+    left: -8px;
+    width: 100%;
+
+    transform: skew(-21deg);
+    transition: all 0.5s ease-in;
+}
+.cool-underline.show-underline::after{
+    width: calc(100% + 16px);
+}
