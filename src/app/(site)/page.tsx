@@ -3,9 +3,9 @@ import Hero from "../components/Hero";
 
 export default function Home() {
   return (
-  <main className="container max-w-full">
-  <Header />
+
+ 
   <Hero />
-  </main>
+ 
   );
 }

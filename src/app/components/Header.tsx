@@ -14,8 +14,9 @@ return (
     <div className="flex h-32 items-center justify-between">
     <div className="flex md:flex md:items-center md:gap-12 ">
     
-      
-      <Image src={logo} alt="logo" className='w-fit  pt-2' />
+      <a href="/">
+      <Image src={logo} alt="logo" className='w-fit  pt-2'  />
+      </a>
     </div>
 
       <div className="md:flex md:items-center md:gap-12">
@@ -23,15 +24,15 @@ return (
         <ul className="flex items-center gap-6 sm:text-sm">
             <li>
             
-              <a className="text-gray-500 text-lg transition font-bold hover:text-gray-500/75" href="#"> About </a>
+              <a className="text-gray-500 text-lg transition font-bold hover:text-gray-500/75" href="#"> Conocenos </a>
             </li>
     
             <li>
-              <a className="text-gray-500 transition text-lg font-bold hover:text-gray-500/75" href="#"> Careers </a>
+              <a className="text-gray-500 transition text-lg font-bold hover:text-gray-500/75" href="#"> Carreras </a>
             </li>
 
             <li>
-              <a className="text-gray-500 transition text-lg font-bold hover:text-gray-500/75" href="#"> Services </a>
+              <a className="text-gray-500 transition text-lg font-bold hover:text-gray-500/75" href="#"> Servicios </a>
             </li>
             <li>
               <a className="text-gray-500 transition text-lg  font-bold hover:text-gray-500/75" href="#"> Blog </a>
