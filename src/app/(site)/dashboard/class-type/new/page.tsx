@@ -2,9 +2,9 @@ import EventTypeForm from "@/app/components/EventTypeForm";
 import DashboardNav from "@/app/components/DashboardNav";
 export default function New() {
   return (
-    <div>
+    <div className="mt-4">
     
-      <DashboardNav />
+   
         <EventTypeForm />
 
     </div>

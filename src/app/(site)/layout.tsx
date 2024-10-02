@@ -32,7 +32,7 @@ export default function RootLayout({
           <main className="container max-w-full">
         <Header />
         </main>
-        {children}
+        {children} 
       </body>
     </html>
   );

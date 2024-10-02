@@ -22,7 +22,7 @@ export default function Hero() {
              
           </h1>
 
-          <p className="mt-4 sm:text-xl/relaxed">
+          <p className="mt-4 sm:text-xl/relaxed ">
             Mejora tu Ingles con nosotros, con tutores experimentados profesionales. 
 
           </p>

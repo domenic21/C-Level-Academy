@@ -2,6 +2,7 @@ export type FromTo = { //for the state of the booking times
     from: string;
     to: string;
     active: boolean;
+    length: number;
   };
   
   export type WeekdayName = 'Monday' | 'Tuesday'

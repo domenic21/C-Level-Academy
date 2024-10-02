@@ -1,6 +1,6 @@
-import {nylas, nylasConfig} from "../../libs/nylas";
+import {nylas, nylasConfig} from "../../../libs/nylas";
 import { NextApiRequest } from "next";
-import {session} from "@/app/libs/session";
+import {session} from "@/libs/session";
 //import {ProfileModel} from "@/models/Profile";
 //import mongoose from "mongoose";
 import {redirect} from "next/navigation";

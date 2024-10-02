@@ -1,7 +1,7 @@
 'use server'; //  the code will be executed in the server .note** needs to be at the top of the file and async functions
 import logo from '@/app/icon-mastery.png';
 import Image from 'next/image';
-import { session } from '@/app/libs/session';
+import { session } from '@/libs/session';
 import NavLog from '@/app/components/Navlog';
 
 

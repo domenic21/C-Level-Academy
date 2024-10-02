@@ -1,8 +1,13 @@
 'use client';
 import clsx from "clsx";
-import { BookingTimes, WeekdayName } from "../libs/types";
+import { BookingTimes, WeekdayName } from "../../libs/types";
 import TimeSelection from "./TimeSelection";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
+import axios from "axios";
+import { useRouter, redirect } from "next/navigation";
+import {  IEventType } from "../../models/EventType";
+import ClassroomDeleteBtn from "./ClassroomDeleteBtn";
+
 
 const Weekdays:WeekdayName[]= [ 
  //WeekdayName is a type from types.ts that defines the days of the week
@@ -15,16 +20,48 @@ const Weekdays:WeekdayName[]= [
     'Sunday',
 ];
 
-export default function EventTypeForm() {
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [length, setLength] = useState('');
-    const [bookingTimes, setBookingTimes] = useState<BookingTimes>({});
+
+export default function EventTypeForm({
+    doc,
+    username = '',
+
+}:{doc?:IEventType
+    username?:string
+}) {
+    const [title, setTitle] = useState(doc?.title || '');
+    const [description, setDescription] = useState(doc?.description ||'');
+    const [length, setLength] = useState(doc?.length||30 );
+    const [bookingTimes, setBookingTimes] = useState<BookingTimes>(doc?.bookingTimes||{});
+    const router = useRouter();
+    async function handleSubmit(ev: FormEvent) {
+        // This function will be called when the user clicks the save button
+        // It will send the form data to the server
+        ev.preventDefault(); // Prevent the default form submission
+        //if id , for edit 
+        const id = doc?._id;
+        const request = id ? axios.put : axios.post;
+        const data = {
+            title,
+            description,
+            length,
+            bookingTimes,
+        };
+      
+        const response = await request('/api/event-types',{...data, id} );
+            if (response.data) {
+                router.push('/dashboard/class-type');
+                router.refresh();
+    
+            }
+
+        
+       
+    }
     function handleBookingTimeChange( //
         // This function will be called when the user changes the booking time
     day: WeekdayName,
     value: string | boolean ,
-    fromOrTo: 'from' | 'to' | 'active' ,
+    prop: 'from' | 'to' | 'active' ,
     ) {
         //setbooking times to the new value
         setBookingTimes(prevBookingTime => {
@@ -34,39 +71,48 @@ export default function EventTypeForm() {
                 //if the day is not in the booking times, add it
 
             }
-            newBookingTimes[day][fromOrTo] = value;
+               // @ts-ignore
+              newBookingTimes[day][prop] = value;
+           
+
             return newBookingTimes;
     });
+    
     }
 
     return (
     
-        <div className="m-4 w-[60%] h-auto mx-auto  grid gap-4 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 lg:gap-8">
+        <form onSubmit={handleSubmit} className="m-4 w-[60%] h-auto mx-auto  grid gap-4 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 lg:gap-8">
             <div className="h-auto rounded-lg bg-gray-200 flex flex-col gap-4 p-4">
                 <label className="flex flex-col">
-                    <span>Title</span>
+                    <span>Title {username}</span>
                     <input
                         type="text"
                         placeholder="title"
                         className="mt-1 p-2 border rounded"
                         value={title}
-                        onChange={(e) => setTitle(e.target.value)}
+                        onChange={ev => setTitle(ev.target.value)} 
                     />
                 </label>
                 <label className="flex flex-col">
                     <span>Description</span>
                     <textarea
+                        
                         placeholder="description"
                         className="mt-1 p-2 border rounded"
                         value={description}
-                        onChange={(e) => setDescription(e.target.value)}
+                        onChange={ev => setDescription(ev.target.value)}
                     />
                 </label>
                 <label className="flex flex-col">
-                    <span>Event Length (minutes) </span>
+                    <span>Event Length (minutes) 2h max </span>
                     <input type="number" placeholder="30"
+                    min='0'
+                    max={120}
+                    
                     value={length}
-                    onChange={(e) => setLength(e.target.value)}
+                    onChange={ev => setLength(parseInt( ev.target.value))}
+                    className=" rounded"
                     />
                 </label>
             </div>
@@ -75,8 +121,6 @@ export default function EventTypeForm() {
                     Availability <br />
                     <div>
                         {Weekdays.map((day) => {
-                            const from = bookingTimes[day]?.from || '00:00';
-                            const to = bookingTimes[day]?.to || '00:00';
                             const isActive = bookingTimes[day]?.active || false;
                             return (
                                 <div key={day} className="grid grid-cols-2 gap-4 p-2">
@@ -97,12 +141,15 @@ export default function EventTypeForm() {
                                         isActive ?'' : 'opacity-40'
                                         )}>
                                     <TimeSelection 
+                                    step={30}
                                     value={bookingTimes[day]?.from || '00:00'}
                                     onChange={value => handleBookingTimeChange(day, value, 'from')}
                                     
                                     />
                                     <span>-</span>
-                                    <TimeSelection value={bookingTimes[day]?.to|| '00:00'}
+                                    <TimeSelection 
+                                    step={30}
+                                    value={bookingTimes[day]?.to|| '00:00'}
                                     onChange={value => handleBookingTimeChange(day, value, 'to')}
                                     />
                                 </div>
@@ -111,17 +158,22 @@ export default function EventTypeForm() {
                         }
                             
                         )}
-                        <div className="flex justify-end ">
-                        <button className="bg-blue-500 text-white p-2 rounded-lg  w-28 ">
+                               
+                        <div className="flex justify-end gap-4 mt-4">
+                        {doc && ( 
+                            <ClassroomDeleteBtn id={doc._id as string}   />
+                        )}
+                        <button type='submit' className="bg-blue-500 text-white p-2 rounded-lg  w-28 ">
 
                             Save
                         </button>
                         </div>
+                     
                     </div>
                 </span>
 
             </div>
 
-        </div>
+        </form>
     );
 }
