@@ -3,7 +3,7 @@ import { BookingModel } from "@/models/Booking";
 import { EventTypeModel } from "@/models/EventType";
 import { ProfileModel } from "@/models/Profile";
 import { addMinutes } from "date-fns/addMinutes";
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 import { NextRequest } from "next/server";
 
 

@@ -6,8 +6,18 @@ import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 
 interface SearchComponentProps {
-  bookedEvents: any[];
-  eventTypeDocs: any[];
+  bookedEvents: {
+    _id: string;
+    guestName: string;
+    guestEmail: string;
+    when: Date;
+    guestNotes: string;
+    eventTypeId: string;
+  }[];
+  eventTypeDocs: {
+    _id: string;
+    title: string;
+  }[];
 }
 
 const SearchComponent: React.FC<SearchComponentProps> = ({

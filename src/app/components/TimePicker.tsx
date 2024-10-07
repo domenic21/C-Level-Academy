@@ -40,10 +40,10 @@ export default function TimePicker({
     length: number;
 }) {
   let today = startOfToday();
-  const currentDate = new Date();
-  let [selectedDay, setSelectedDay] = useState(today);
-  let [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"));
-  let firstDayCurrentMonth = parse(currentMonth, "MMM-yyyy", new Date());
+  
+  const [selectedDay, setSelectedDay] = useState(today);
+  const [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"));
+  const firstDayCurrentMonth = parse(currentMonth, "MMM-yyyy", new Date());
   const [busySlots, setBusySlots] = useState<TimeSlot[]>([]);
   const [busySlotsLoaded, setBusySlotsLoaded] = useState(false);
 
@@ -68,8 +68,8 @@ export default function TimePicker({
   function isBusy(time: Date) {
     const bookingFrom = time;
     const bookingTo = addMinutes(new Date(time), length);
-
-    for (let busySlot of busySlots) {
+    let busySlot: TimeSlot;
+    for ( busySlot of busySlots) {
       const busyFrom = new Date(parseInt(busySlot.startTime) * 1000);
       const busyTo = new Date(parseInt(busySlot.endTime) * 1000);
       if (isAfter(bookingTo, busyFrom) && isBefore(bookingTo, busyTo)) {
@@ -210,7 +210,7 @@ export default function TimePicker({
   );
 } 
 
-let colStartClasses = [
+const colStartClasses = [
   "",
   "col-start-2",
   "col-start-3",

@@ -140,10 +140,12 @@ export default function Hero() {
               className="overflow-hidden rounded-lg border border-gray-100 bg-white shadow-sm"
               key={course.id}
             >
-              <img
+              <Image
                 alt={course.title}
                 src={course.imageUrl}
                 className="h-56 w-full object-cover"
+                width={300}
+                height={200}
               />
 
               <div className="p-4 sm:p-6">

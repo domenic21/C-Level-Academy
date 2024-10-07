@@ -4,7 +4,7 @@ import { BookingTimes, WeekdayName } from "../../libs/types";
 import TimeSelection from "./TimeSelection";
 import { FormEvent, useState } from "react";
 import axios from "axios";
-import { useRouter, redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import {  IEventType } from "../../models/EventType";
 import ClassroomDeleteBtn from "./ClassroomDeleteBtn";
 
@@ -71,7 +71,7 @@ export default function EventTypeForm({
                 //if the day is not in the booking times, add it
 
             }
-               // @ts-ignore
+               // @ts-expect-error
               newBookingTimes[day][prop] = value;
            
 
