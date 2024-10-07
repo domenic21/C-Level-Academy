@@ -12,7 +12,7 @@ type PageProps ={
 
 
 export default async function EditClassroomTypePage({params}: PageProps){
-    const id = params.id;
+    
      await mongoose.connect(process.env.MONGODB_URI as string )
      const eventTypeDoc = await EventTypeModel.findOne({_id: params.id});
      console.log(eventTypeDoc);

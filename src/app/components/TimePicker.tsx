@@ -39,7 +39,7 @@ export default function TimePicker({
   bookingTimes: BookingTimes;
     length: number;
 }) {
-  let today = startOfToday();
+  const today = startOfToday();
   
   const [selectedDay, setSelectedDay] = useState(today);
   const [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"));
@@ -63,7 +63,7 @@ export default function TimePicker({
         
         });
     }
-  }, [selectedDay]);
+  }, [selectedDay, username]);
 
   function isBusy(time: Date) {
     const bookingFrom = time;
@@ -92,25 +92,25 @@ export default function TimePicker({
   }
 
     
-  let days = eachDayOfInterval({
+  const days = eachDayOfInterval({
     start: firstDayCurrentMonth,
     end: endOfMonth(firstDayCurrentMonth),
   });
 
   function nextMonth() {
-    let firstDayNextMonth = add(firstDayCurrentMonth, { months: 1 });
+    const firstDayNextMonth = add(firstDayCurrentMonth, { months: 1 });
     setCurrentMonth(format(firstDayNextMonth, "MMM-yyyy"));
   }
 
 
   function prevMonth() {
-    let firstDayNextMonth = add(firstDayCurrentMonth, { months: -1 });
+    const firstDayNextMonth = add(firstDayCurrentMonth, { months: -1 });
     setCurrentMonth(format(firstDayNextMonth, "MMM-yyyy"));
   }
   function handleDayClick(day: Date) {
   setSelectedDay(day);
   }
-    let bookingHours = [];
+    const bookingHours = [];
     
   const selectedDayConfig = bookingTimes?.[format(selectedDay, "EEEE") as WeekdayName];
 

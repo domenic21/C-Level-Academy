@@ -71,9 +71,8 @@ export default function EventTypeForm({
                 //if the day is not in the booking times, add it
 
             }
-               // @ts-expect-error
+               // @ts-expect-error: prop is dynamically assigned
               newBookingTimes[day][prop] = value;
-           
 
             return newBookingTimes;
     });

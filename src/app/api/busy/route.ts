@@ -28,9 +28,9 @@ export async function GET(req: NextRequest) {
 });   
 let busySlots:TimeSlot[] = [];
 if (result.data?.[0]) {
-  // @ts-expect-error
+  // @ts-expect-error: TypeScript cannot infer the type of result.data[0].timeSlots correctly
   const slots = result.data?.[0]?.timeSlots as TimeSlot[];
-  // @ts-expect-error
+  // @ts-expect-error: TypeScript cannot infer the type of result.data[0].timeSlots correctly
   busySlots = slots.filter(slot => slot.status === 'busy');
 }
 
