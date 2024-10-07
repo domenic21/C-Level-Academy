@@ -15,7 +15,7 @@ return (
     <div className="flex md:flex md:items-center md:gap-12 ">
     
       <a href="/">
-      <Image src={logo} alt="logo" className='w-fit  pt-2'  />
+      <Image src={logo} alt="logo" className='pt-2 w-full'   />
       </a>
     </div>
 

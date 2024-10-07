@@ -3,12 +3,14 @@ import mongoose, { models, Schema } from "mongoose";
 interface IProfile  extends Document {
     email: string;
     userName: string;
+    grantId: string;
    
 }
 
 const ProfileSchema = new Schema<IProfile>({
     email:{type:String, required:true, unique:true},
     userName:{type:String,  unique:true},
+    grantId:{type:String}
    
 });
 

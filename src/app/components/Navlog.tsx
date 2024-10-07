@@ -43,10 +43,8 @@ export default function NavLog({ email }: { email: string }) {
                     className="rounded-md bg-blue-600 px-5 py-2.5 text-sm font-medium text-white shadow"
                     href={'/api/auth'} // Redirect to the login page
                 >
-                    Login
+                    Login Instructors
                 </a>
-
-               
             </div>
         );
 

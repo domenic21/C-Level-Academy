@@ -1,40 +1,97 @@
 "use client";
 import { weekdaysShortNames } from "@/libs/constants";
 import { BookingTimes, WeekdayName } from "@/libs/types";
+import axios from "axios";
 import clsx from "clsx";
 import {
   add,
   addMinutes,
   eachDayOfInterval,
+  endOfDay,
   endOfMonth,
   format,
   getDay,
+  isAfter,
   isBefore,
   isEqual,
   isFuture,
   isToday,
   parse,
+  startOfDay,
   startOfToday,
-  subMonths,
+  
 } from "date-fns";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useState } from "react";
+import Link from "next/link";
+import { TimeSlot } from "nylas";
+import { useEffect, useState } from "react";
+import { PulseLoader } from "react-spinners";
 
 export default function TimePicker({
   bookingTimes,
   length,
+  meetingUri,
+    username,
   
 }: {
+    meetingUri: string;
+    username: string;
   bookingTimes: BookingTimes;
     length: number;
 }) {
   let today = startOfToday();
   const currentDate = new Date();
-  const [activeMonth, setActiveMonth] = useState(currentDate);
   let [selectedDay, setSelectedDay] = useState(today);
   let [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"));
   let firstDayCurrentMonth = parse(currentMonth, "MMM-yyyy", new Date());
+  const [busySlots, setBusySlots] = useState<TimeSlot[]>([]);
+  const [busySlotsLoaded, setBusySlotsLoaded] = useState(false);
 
+
+  useEffect(() => {
+    if (selectedDay) {
+      setBusySlots([]);
+      const params = new URLSearchParams();
+      params.set('userName', username);
+      params.set('from', startOfDay(selectedDay).toISOString());
+      params.set('to', endOfDay(selectedDay).toISOString());
+      axios
+        .get(`/api/busy?`+params.toString())
+        .then(response => {
+          setBusySlots(response.data);
+          setBusySlotsLoaded(true);
+        
+        });
+    }
+  }, [selectedDay]);
+
+  function isBusy(time: Date) {
+    const bookingFrom = time;
+    const bookingTo = addMinutes(new Date(time), length);
+
+    for (let busySlot of busySlots) {
+      const busyFrom = new Date(parseInt(busySlot.startTime) * 1000);
+      const busyTo = new Date(parseInt(busySlot.endTime) * 1000);
+      if (isAfter(bookingTo, busyFrom) && isBefore(bookingTo, busyTo)) {
+        return true;
+      }
+      if (isAfter(bookingFrom, busyFrom) && isBefore(bookingFrom, busyTo)) {
+        return true;
+      }
+      if (isEqual(bookingFrom, busyFrom)) {
+        return true;
+      }
+      if (isEqual(bookingTo, busyTo)) {
+        return true;
+      }
+    }
+
+    return false;
+    
+    
+  }
+
+    
   let days = eachDayOfInterval({
     start: firstDayCurrentMonth,
     end: endOfMonth(firstDayCurrentMonth),
@@ -69,7 +126,10 @@ export default function TimePicker({
 
    let a = selectedDayFrom;
     do{
+        if(!isBusy(a)){
         bookingHours.push(a);
+        }
+      
         a = addMinutes(a,  length);
 
     }while(isBefore(addMinutes(a,length) , selectedDayTo));
@@ -104,6 +164,7 @@ export default function TimePicker({
             const canBook = isFuture(day) && ActiveBookingDay;
             return (
               <button
+                
                 disabled={!canBook} 
                 onClick={() => handleDayClick(day)}
                 className={clsx(
@@ -127,11 +188,22 @@ export default function TimePicker({
         
         <p> {format(selectedDay,"EEEE, MMMM d" )}</p>
         <div className="flex flex-col space-y-2 overflow-y-scroll overflow-x-hidden max-h-60">
-            {bookingHours.map((bookingTime, index) => (
-            <button key={index} className="p-2 bg-gray-200 rounded-xl hover:bg-blue-200 mr-2 ">
+        {bookingHours.length === 0 && busySlotsLoaded && <div className="text-center font-semibold text-red-600 py-3">No available slots</div>}
+        {!busySlotsLoaded && (
+              <div className="flex justify-center py-4">
+                <PulseLoader color="#3B82F6" />
+
+              </div>
+            )}
+      
+            { busySlotsLoaded && bookingHours.map((bookingTime, index) => (
+                   
+            <Link href={`/${username}/${meetingUri}/${bookingTime.toISOString()}`} key={index} className="p-2 bg-gray-200 rounded-xl hover:bg-blue-200 mr-2 ">
             {format(bookingTime, "HH:mm")}
-            </button>
+            </Link>
             ))}
+
+         
         </div>
       </section>
     </div>

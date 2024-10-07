@@ -67,7 +67,7 @@ export default function EventTypeForm({
         setBookingTimes(prevBookingTime => {
             const newBookingTimes:BookingTimes = {...prevBookingTime};
             if (!newBookingTimes[day]) {
-                newBookingTimes[day] = {from: '00:00', to: '00:00', active: false};
+                newBookingTimes[day] = {from: '00:00', to: '00:00', active: false, length: 0};
                 //if the day is not in the booking times, add it
 
             }
