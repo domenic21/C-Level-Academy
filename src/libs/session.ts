@@ -25,7 +25,7 @@ export const session = nextAppSession<MySessionData>({
         });
       });
     },
-    set: (sid: string, session: MySessionData) => {
+    set: (sid: string, session: string) => {
       return new Promise((resolve, reject) => {
         MongoStore.create({
           mongoUrl: process.env.MONGODB_URI, // MongoDB connection string
