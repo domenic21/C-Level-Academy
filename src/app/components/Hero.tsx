@@ -1,6 +1,6 @@
 "use client";
 import { BookCheck, Earth, Laptop, Mail } from "lucide-react";
-import logo from "@/app/icon-mastery.png"; // Adjust the path to your logo image
+import logo from "@/app/icon-mastery.png"; 
 import Image from 'next/image';
 import { useEffect, useState } from "react";
 import { courses } from "@/libs/constants";
@@ -36,7 +36,7 @@ export default function Hero() {
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               <a
                 className="block w-full rounded bg-blue-900 px-12 py-3 text-sm font-medium text-white shadow hover:bg-yellow-400 focus:outline-none focus:ring active:bg-red-500 sm:w-auto"
-                href="#LearnMore"
+                href="https://c-level-mastery.click/Dom21/quick-meeting"
               >
                 {/* add quick meeting link for boooking*/}
                 Get Started
@@ -149,11 +149,11 @@ export default function Hero() {
               />
 
               <div className="p-4 sm:p-6">
-                <a href="#">
+               
                   <h3 className="text-lg font-medium text-gray-900">
                     {course.title}
                   </h3>
-                </a>
+                
 
                 <p className="mt-2 line-clamp-3 text-sm/relaxed text-gray-500">
                   {course.description}

@@ -15,7 +15,7 @@ return (
     <div className="flex md:flex md:items-center md:gap-12 ">
     
       <a href="/">
-      <Image src={logo} alt="logo" className='pt-2 w-full'   />
+      <Image src={logo} alt="logo" className='pt-2 w-full' width={150} height={150}   />
       </a>
     </div>
 
@@ -24,18 +24,18 @@ return (
         <ul className="flex items-center gap-6 sm:text-sm">
             <li>
             
-              <a className="text-gray-500 text-lg transition font-bold hover:text-gray-500/75" href="#"> Conocenos </a>
+              <a className="text-gray-500 text-lg transition font-bold hover:text-gray-500/75" href="#">  </a>
             </li>
     
             <li>
-              <a className="text-gray-500 transition text-lg font-bold hover:text-gray-500/75" href="#"> Carreras </a>
+              <a className="text-gray-500 transition text-lg font-bold hover:text-gray-500/75" href="#"></a>
             </li>
 
             <li>
-              <a className="text-gray-500 transition text-lg font-bold hover:text-gray-500/75" href="#"> Servicios </a>
+              <a className="text-gray-500 transition text-lg font-bold hover:text-gray-500/75" href="#"> </a>
             </li>
             <li>
-              <a className="text-gray-500 transition text-lg  font-bold hover:text-gray-500/75" href="#"> Blog </a>
+              <a className="text-gray-500 transition text-lg  font-bold hover:text-gray-500/75" href="#"> </a>
             </li>
           </ul>
         </nav>
@@ -46,20 +46,7 @@ return (
         
         </div>
          
-         <div className="block md:hidden">
-            <button className="rounded bg-gray-100 p-2 text-gray-600 transition hover:text-gray-600/75">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="size-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
-          </div>
+         
         </div>
           
         </div>
