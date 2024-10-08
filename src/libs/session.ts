@@ -1,4 +1,4 @@
-import MongoStore from 'connect-mongo';
+
 import nextAppSession from 'next-app-session';
 
 // This is a simple session manager that stores session data in memory or cookie
