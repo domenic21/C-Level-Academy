@@ -52,6 +52,6 @@ export async function GET(req: NextRequest) {
 
 
   
-      redirect("/dashboard"); // Redirect to the home page
+      redirect("/"); // Redirect to the home page
     } 
     
