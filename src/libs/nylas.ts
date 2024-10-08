@@ -2,7 +2,7 @@ import Nylas from "nylas";
 
 export const nylasConfig = {
   clientId: process.env.NYLAS_CLIENT_ID,
-  callbackUri:  "https://witty-stone-0700b3c1e.5.azurestaticapps.net/api/oauth/exchange",
+  callbackUri: process.env.NEXT_PUBLIC_URL + "/api/oauth/exchange",
   apiKey: process.env.NYLAS_API_KEY,
   apiUri: process.env.NYLAS_API_URI,
 };
