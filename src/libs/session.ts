@@ -30,7 +30,7 @@ export const session = nextAppSession<MySessionData>({
         MongoStore.create({
           mongoUrl: process.env.MONGODB_URI, // MongoDB connection string
           ttl: 14 * 24 * 60 * 60 // Set session expiry time (14 days here)
-        }).set(sid, session, (err: any) => {
+        }).set(sid, session, (err: Error | null) => {
           if (err) return reject(err);
           resolve();
         });
