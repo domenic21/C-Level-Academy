@@ -7,7 +7,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { IEventType } from "../../models/EventType";
 import ClassroomDeleteBtn from "./ClassroomDeleteBtn";
-import { ProfileModel } from "@/models/Profile";
+
 
 const Weekdays: WeekdayName[] = [
   //WeekdayName is a type from types.ts that defines the days of the week
