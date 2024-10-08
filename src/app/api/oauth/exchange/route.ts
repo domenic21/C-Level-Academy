@@ -46,8 +46,8 @@ export async function GET(req: NextRequest) {
 
       // NB: This stores in RAM
       // In a real app you would store this in a database, associated with a user
-      //process.env.NYLAS_GRANT_ID = grantId; // Store the grant ID in the environment variable
-     // await session().set('grantId', grantId);// Store the grant ID in the session in a cookie 
+      process.env.NYLAS_GRANT_ID = grantId; // Store the grant ID in the environment variable
+      await session().set('grantId', grantId);// Store the grant ID in the session in a cookie 
      // Store the email in the session in a cookie
 
 
