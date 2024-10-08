@@ -27,9 +27,10 @@ export async function GET(req: NextRequest) {
       const response = await nylas.auth.exchangeCodeForToken(codeExchangePayload);
       
       const { grantId, email } = response;
-      if (!mongoose.connection.readyState) {
+      console.log("Grant ID:", grantId, "email:", email);
+      
         await mongoose.connect(process.env.MONGODB_URI as string);
-      }
+      
         const profileDoc = await ProfileModel.findOne({ email });
         if (profileDoc) {   
             profileDoc.grantId = grantId;
@@ -42,7 +43,7 @@ export async function GET(req: NextRequest) {
 
 
 
-
+     
 
       // NB: This stores in RAM
       // In a real app you would store this in a database, associated with a user
@@ -52,6 +53,6 @@ export async function GET(req: NextRequest) {
 
 
   
-      redirect("/"); // Redirect to the home page
+      redirect("/dashboard"); // Redirect to the home page
     } 
     
