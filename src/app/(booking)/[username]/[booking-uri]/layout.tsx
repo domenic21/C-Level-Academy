@@ -1,4 +1,4 @@
-
+"user server";
 import { EventTypeModel } from "@/models/EventType";
 import { ProfileModel } from "@/models/Profile";
 import {Clock, Info} from "lucide-react";

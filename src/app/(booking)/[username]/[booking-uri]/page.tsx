@@ -1,4 +1,4 @@
-
+"use server";
 import TimePicker from "@/app/components/TimePicker";
 import {EventTypeModel} from "@/models/EventType";
 import { ProfileModel } from "@/models/Profile";

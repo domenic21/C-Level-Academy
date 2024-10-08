@@ -1,3 +1,4 @@
+"use server";
 import EventTypeForm from "@/app/components/EventTypeForm";
 import { session } from "@/libs/session";
 import { EventTypeModel } from "@/models/EventType";

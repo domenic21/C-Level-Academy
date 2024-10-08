@@ -39,8 +39,7 @@ export async function GET(req: NextRequest) {
             await ProfileModel.create({ email, grantId });
         }
         await session().set('email', email);
-     
-                    
+
 
        // Debugging logs
 console.log('Session email set:', await session().get('email'));
