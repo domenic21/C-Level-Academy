@@ -40,9 +40,11 @@ export async function GET(req: NextRequest) {
         }
         await session().set('email', email);
      
+                    
 
-
-
+       // Debugging logs
+console.log('Session email set:', await session().get('email'));
+console.log('Session grantId set:', await session().get('grantId'));
      
 
       // NB: This stores in RAM
@@ -51,8 +53,6 @@ export async function GET(req: NextRequest) {
       await session().set('grantId', grantId);// Store the grant ID in the session in a cookie 
      // Store the email in the session in a cookie
 
-
-  
       redirect("/dashboard"); // Redirect to the home page
     } 
     

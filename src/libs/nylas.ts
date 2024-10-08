@@ -15,4 +15,5 @@ export const nylas = new Nylas({
 /*const AuthConfig = {
   clientId: process.env.NYLAS_CLIENT_ID as string,
   redirectUri: "http://localhost:3000/api/oauth/exchange",
+  https://c-level-academy.vercel.app/
 };*/
