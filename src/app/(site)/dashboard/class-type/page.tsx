@@ -24,7 +24,7 @@ export default async function ClassTypePage() {
              justify-between p-4 bg-gray-100 border rounded-lg shadow-md"
         >
           Quick meeting: {""}
-          {process.env.NEXT_PUBLIC_URI}/
+          {process.env.NEXT_PUBLIC_URL}/
           {Profile?.userName}/quick-meeting
         </div>
         <Link
