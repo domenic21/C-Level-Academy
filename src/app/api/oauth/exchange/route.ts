@@ -1,8 +1,8 @@
-import {nylas, nylasConfig} from "@/libs/nylas";
-import {session} from "@/libs/session";
+import { nylas, nylasConfig } from "@/libs/nylas";
+import { session } from "@/libs/session";
 import mongoose from "mongoose";
-import {redirect} from "next/navigation";
-import {NextRequest} from "next/server";
+import { redirect } from "next/navigation";
+import { NextRequest, NextResponse } from "next/server";
 import { ProfileModel } from "@/models/Profile";
 
 export async function GET(req: NextRequest) {
@@ -14,22 +14,24 @@ export async function GET(req: NextRequest) {
     console.log("Authorization code12:", code);
     if (!code) {
       //response if code is not found with  json
-      return Response.json(  "Authorization code not found ", {status:400} );
+      return NextResponse.json({ error: "Authorization code not found" }, { status: 400 });
     }
   
     const codeExchangePayload = {
       clientSecret: nylasConfig.apiKey, //get the api key from the nylas config
       clientId: nylasConfig.clientId as string, //make string because is a number TYPESCRIPT
       redirectUri: nylasConfig.callbackUri, //get the redirect uri from the nylas config
-      code: code, //get the code from the url
+      code, //get the code from the url
     };
       
       const response = await nylas.auth.exchangeCodeForToken(codeExchangePayload);
       
       const { grantId, email } = response;
-      await mongoose.connect(process.env.MONGODB_URI as string);
+      if (!mongoose.connection.readyState) {
+        await mongoose.connect(process.env.MONGODB_URI as string);
+      }
         const profileDoc = await ProfileModel.findOne({ email });
-        if (profileDoc) {
+        if (profileDoc) {   
             profileDoc.grantId = grantId;
             await profileDoc.save();
         } else {
@@ -50,6 +52,6 @@ export async function GET(req: NextRequest) {
 
 
   
-      redirect('/dashboard'); // Redirect to the home page
+      redirect("/dashboard"); // Redirect to the home page
     } 
     
