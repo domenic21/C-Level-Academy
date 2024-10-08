@@ -25,7 +25,7 @@ export default async function ClassTypePage() {
         >
           Quick meeting: {""}
           {process.env.NEXT_PUBLIC_URL}/
-          {Profile?.userName}/quick-meeting
+          {Profile.userName}/quick-meeting
         </div>
         <Link
                 href="/dashboard/class-type/new"
@@ -62,7 +62,7 @@ export default async function ClassTypePage() {
                 {et.length} minutes
               </span>
           
-              <a href={et.uri}>
+          <a href={`${process.env.NEXT_PUBLIC_URL}/${Profile.userName}/${et.title}`}>
                 <Link2 size={25} />
               </a>
             </div>
