@@ -2,7 +2,7 @@ import Nylas from "nylas";
 
 export const nylasConfig = {
   clientId: process.env.NYLAS_CLIENT_ID,
-  callbackUri: process.env.NYLAS_CALLBACK_URI!, 
+  callbackUri: "https://c-level-academy.vercel.app/api/oauth/exchange", 
   apiKey: process.env.NYLAS_API_KEY,
   apiUri: process.env.NYLAS_API_URI,
 };
