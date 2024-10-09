@@ -2,12 +2,18 @@ import Nylas from "nylas";
 
 export const nylasConfig = {
   clientId: process.env.NYLAS_CLIENT_ID,
-  callbackUri: "http://localhost:3000/api/oauth",
+  callbackUri: process.env.NEXT_PUBLIC_URL + "/api/oauth/exchange",
   apiKey: process.env.NYLAS_API_KEY,
   apiUri: process.env.NYLAS_API_URI,
 };
 
 export const nylas = new Nylas({
-  apiKey: nylasConfig.apiKey as string,
-  apiUri: nylasConfig.apiUri,
+  apiKey: process.env.NYLAS_API_KEY!,
+  apiUri: process.env.NYLAS_API_URI,
 });
+
+/*const AuthConfig = {
+  clientId: process.env.NYLAS_CLIENT_ID as string,
+  redirectUri: "http://localhost:3000/api/oauth/exchange",
+  https://c-level-academy.vercel.app/
+};*/

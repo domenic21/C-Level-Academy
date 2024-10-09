@@ -40,7 +40,7 @@ export default function DeleteBtn({id}:{id:string}) {
                                 type="button"
                                 className="rounded bg-red-50 px-4 py-2 text-sm font-medium text-red-600"
                             >
-                                Yes, I'm sure
+                                Yes, delete
                             </button>
 
                             <button

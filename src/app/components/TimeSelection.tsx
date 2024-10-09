@@ -1,7 +1,7 @@
 export default function TimeSelection({
     value,
     onChange, // Function to call when the value changes, this is a prop
-    step =30,
+    
     // a prop is a value that is passed to a component
   }: {
     value: string; // The current value

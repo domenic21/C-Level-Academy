@@ -6,8 +6,18 @@ import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 
 interface SearchComponentProps {
-  bookedEvents: any[];
-  eventTypeDocs: any[];
+  bookedEvents: {
+    _id: string;
+    guestName: string;
+    guestEmail: string;
+    when: Date;
+    guestNotes: string;
+    eventTypeId: string;
+  }[];
+  eventTypeDocs: {
+    _id: string;
+    title: string;
+  }[];
 }
 
 const SearchComponent: React.FC<SearchComponentProps> = ({
@@ -36,7 +46,7 @@ const SearchComponent: React.FC<SearchComponentProps> = ({
 
   return (
     <div   className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1  ">
-      {/* Render your filtered events here */}
+      {/* Render  filtered events  */}
       {filteredEvents.map((booking) => {
         const eventTypeDoc = eventTypeDocs.find(
           (etd) => (etd._id as string).toString() === booking.eventTypeId
