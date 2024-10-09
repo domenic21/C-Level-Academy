@@ -36,7 +36,7 @@ export default function Hero() {
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               <a
                 className="block w-full rounded bg-blue-900 px-12 py-3 text-sm font-medium text-white shadow hover:bg-yellow-400 focus:outline-none focus:ring active:bg-red-500 sm:w-auto"
-                href="https://c-level-mastery.click/Dom21/quick-meeting"
+                href="https://c-level-academy.vercel.app/Dom21/quick-meeting"
               >
                 {/* add quick meeting link for boooking*/}
                 Get Started
