@@ -22,7 +22,7 @@ const Weekdays: WeekdayName[] = [
 
 export default function EventTypeForm({
   doc,
-  userName = "",
+  userName = '' ,
 }: {
   doc?: IEventType;
   userName?: string;
@@ -125,7 +125,7 @@ export default function EventTypeForm({
              justify-between p-4 bg-gray-100 border rounded-lg shadow-md"
         >
            Meeting URL: {""}
-          {process.env.NEXT_PUBLIC_URL}/
+          {process.env.NEXT_PUBLIC_URL}/{userName}/
           {title.replace(/\s+/g, '')}
         </div>
       </div>
