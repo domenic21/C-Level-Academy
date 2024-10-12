@@ -126,7 +126,7 @@ export default function EventTypeForm({
         >
            Meeting URL: {""}
           {process.env.NEXT_PUBLIC_URL}/
-          {userName}/{title}
+          {title.replace(/\s+/g, '')}
         </div>
       </div>
       <div className="h-fit rounded-lg bg-gray-200 flex gap-4">

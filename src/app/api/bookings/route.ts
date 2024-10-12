@@ -20,7 +20,7 @@ type JsonData = {
 export async function POST (req: NextRequest) {
     const data:JsonData = await req.json();
     const {guestName, guestEmail, guestNotes, bookingTime} = data;
-    mongoose.connect(process.env.MONGODB_URI as string);
+    await  mongoose.connect(process.env.MONGODB_URI as string);
     const profileDoc = await ProfileModel.findOne({
         userName: data.username,
       });
@@ -45,7 +45,7 @@ export async function POST (req: NextRequest) {
       const grandId = profileDoc.grantId;
       const startDate = new Date(bookingTime);
 
-       nylas.events.create({
+       await nylas.events.create({
         identifier: grandId,
         requestBody: {
           title: eventtDoc.title,
@@ -67,12 +67,13 @@ export async function POST (req: NextRequest) {
           ],
         },
         queryParams: {
-          calendarId: eventtDoc.email,
+          calendarId: eventtDoc.email as string,
+          notifyParticipants: true,
         },
       });
 
 
-        return Response.json('success', {status:201});
+        return Response.json('success email sent', {status:201});
 }
 //Calendar API create event 
 
